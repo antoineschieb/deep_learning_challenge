@@ -1,6 +1,7 @@
 from PIL import Image
 import torch
 from torch.utils.data import Dataset
+from torch.nn.functional import one_hot
 
 from constants import labels_map
 
@@ -25,11 +26,11 @@ class CustomImageDataset(Dataset):
         if self.load_embeddings:
             emb_path = f"challenge/{labels_map[label]}/c{label+1}_{str(class_sample).zfill(3)}.pt"
             emb = torch.load(emb_path)
-            return emb, label
+            return emb, one_hot(torch.tensor(label), num_classes=4)
         else:
             img_path = f"challenge/{labels_map[label]}/c{label+1}_{str(class_sample).zfill(3)}.tif"
             image = Image.open(img_path)
             if self.transform:
                 image = self.transform(image)
-            return image, label
+            return image, one_hot(torch.tensor(label), num_classes=4)
     
