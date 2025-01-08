@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "interview"
+version = "0.1.0"
+description = ""
+authors = ["Antoine Schieb <antoine.schieb@u-bourgogne.fr>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+torch = "^2.5.1"
+numpy = "^2.2.1"
+pillow = "^11.1.0"
+torchvision = "^0.20.1"
+pandas = "^2.2.3"
+timm = "^1.0.12"
+
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
