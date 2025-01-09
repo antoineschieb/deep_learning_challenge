@@ -1,20 +1,18 @@
 import torch
 from transformers import AutoImageProcessor, AutoModel
 from dataset import CustomImageDataset
-from torchvision.transforms import Resize
 from tqdm import tqdm
 
-from constants import labels_map
+from constants import LABELS_MAP
 
 
 if __name__ == "__main__":
-
     # Load phikon-v2 encoder
     processor = AutoImageProcessor.from_pretrained("owkin/phikon-v2")
     model = AutoModel.from_pretrained("owkin/phikon-v2")
     model.eval()
 
-    full_ds = CustomImageDataset(list(range(400)), transform=Resize(size=(224,224)))
+    full_ds = CustomImageDataset(list(range(400)))
 
     with torch.inference_mode():
         for i,(image,label) in tqdm(enumerate(full_ds)):
@@ -28,4 +26,4 @@ if __name__ == "__main__":
 
             class_sample = i % 100
 
-            torch.save(features, f"challenge/{labels_map[label]}/c{label+1}_{str(class_sample).zfill(3)}.pt")
+            torch.save(features, f"challenge/{LABELS_MAP[label]}/c{label+1}_{str(class_sample).zfill(3)}.pt")
