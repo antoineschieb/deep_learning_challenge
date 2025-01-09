@@ -7,12 +7,12 @@ This project uses the `poetry` package manager. The requirements can be found in
 
 # How to run the code
 ### Training and testing a new model on the challenge data
-The first step is to generate the embeddings, which will be stored in the same folder as
+The first step is to generate the embeddings, which will be stored in the same folder as the images.
 1) Locate the dataset folder which contains the `class1`,`class2`,`class3`,`class4` subfolders at its root. 
 2) Change the environment variable: `DATA_ROOT=/path/to/data/`
 3) Run the script `python create_embeddings.py` once. This will generate the embeddings with the same name as their corresponding tif image, and save them as `.pt` files.
 For the sake of simplicty, training and testing the model on the available data can be done directly in a notebook.
-4) Environment variables don't behave well in notebooks, so it is required to manually edit the first cell of the `train_test.ipynb` notebook and change the environment variable `%env DATA_ROOT=/path/to/data/`
+4) To set an environment variable in a notebook, it is required to manually edit the first cell of the `train_test.ipynb` notebook and change the environment variable `%env DATA_ROOT=/path/to/data/`
 5) Run the whole `train_test.ipynb` notebook. The trained MLP model will be exported at the project root as `mlp.pth`
 
 ### Testing a trained model on any image
