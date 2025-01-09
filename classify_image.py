@@ -1,9 +1,9 @@
-import os
+import sys
 import torch
 from transformers import AutoImageProcessor, AutoModel
 from PIL import Image
 
-from constants import DATA_ROOT, LABELS_MAP
+from constants import LABELS_MAP
 from model import MLP
 
 
@@ -31,6 +31,6 @@ if __name__ == '__main__':
     mlp.load_state_dict(torch.load('mlp.pth', weights_only=True))
     mlp.eval()
 
-    image = Image.open(f"{DATA_ROOT}/class1/c1_000.tif")  # change this path if needed
-    print(classify(image, processor, encoder, mlp))
+    image = Image.open(sys.argv[1])
+    print(f'Prediction: {classify(image, processor, encoder, mlp)}')
 
