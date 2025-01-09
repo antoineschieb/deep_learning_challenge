@@ -5,17 +5,18 @@ This repository contains the code for the Deep Learning challenge, as well as in
 This project uses the `poetry` package manager. The requirements can be found in `pyproject.toml`
 
 # How to run the code
-## Training and testing on the available data
-For the sake of simplicty, training the model on the available data can be done directly in a notebook. 
+## Training and testing a new model on the challenge data
+For the sake of simplicty, training the model on the available data can be done directly in a notebook.
 
-1) Locate the dataset folder which should contain the `class1`,`class2`,`class3`,`class4` subfolders and set the following environment variable:
-    `export DATA_ROOT = /path/to/folder/`
-2) Run the `train_test.ipynb` notebook.
+1) Locate the dataset folder which contains the `class1`,`class2`,`class3`,`class4` subfolders at its root.
+2) Edit the first cell of the `train_test.ipynb` notebook and change the environment variable `%env DATA_ROOT=/path/to/data/`
+3) Run the whole notebook
 
-## Testing the model on any other image
-You can also run the model on any other image.
+## Testing a trained model on any image
+You can also run the model on the challenge data, or any other image.
 1) Ensure that the trained weights `mlp.pth` are located at the root of this project.
 2) Run python classify_image.py /path/to/any/other/image.tif
+3) The program will output the predicted class
 
 # Author
 

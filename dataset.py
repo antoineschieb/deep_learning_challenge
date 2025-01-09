@@ -5,7 +5,7 @@ import torch
 from torch.utils.data import Dataset
 from torch.nn.functional import one_hot
 
-from constants import LABELS_MAP
+from constants import DATA_ROOT, LABELS_MAP
 
 
 class CustomImageDataset(Dataset):
@@ -26,11 +26,11 @@ class CustomImageDataset(Dataset):
         class_sample = data_index % 100
         
         if self.load_embeddings:
-            emb_path = f"{os.environ['DATA_ROOT']}/{LABELS_MAP[label]}/c{label+1}_{str(class_sample).zfill(3)}.pt"
-            emb = torch.load(emb_path)
+            emb_path = os.path.join(DATA_ROOT,f"{LABELS_MAP[label]}/c{label+1}_{str(class_sample).zfill(3)}.pt")
+            emb = torch.load(emb_path, weights_only=True)
             return emb, one_hot(torch.tensor(label), num_classes=4).to(torch.float)
         else:
-            img_path = f"{os.environ['DATA_ROOT']}/{LABELS_MAP[label]}/c{label+1}_{str(class_sample).zfill(3)}.tif"
+            img_path = os.path.join(DATA_ROOT,f"{LABELS_MAP[label]}/c{label+1}_{str(class_sample).zfill(3)}.tif")
             image = Image.open(img_path)
             return image, one_hot(torch.tensor(label), num_classes=4).to(torch.float)
     
