@@ -1,9 +1,10 @@
+import os
 import torch
 from transformers import AutoImageProcessor, AutoModel
 from dataset import CustomImageDataset
 from tqdm import tqdm
 
-from constants import LABELS_MAP
+from constants import DATA_ROOT, LABELS_MAP
 
 
 if __name__ == "__main__":
@@ -26,4 +27,5 @@ if __name__ == "__main__":
 
             class_sample = i % 100
 
-            torch.save(features, f"challenge/{LABELS_MAP[label]}/c{label+1}_{str(class_sample).zfill(3)}.pt")
+            int_label = int(torch.argmax(label))
+            torch.save(features, os.path.join(DATA_ROOT,f"{LABELS_MAP[int_label]}/c{int_label+1}_{str(class_sample).zfill(3)}.pt"))

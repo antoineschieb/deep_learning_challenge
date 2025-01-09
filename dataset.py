@@ -16,7 +16,6 @@ class CustomImageDataset(Dataset):
     def __len__(self):
         return len(self.samples)
 
-    @cache
     def __getitem__(self, idx):
         if isinstance(idx, slice):
             return [self.__getitem__(i) for i in range(*idx.indices(len(self)))]  # Allow slicing
