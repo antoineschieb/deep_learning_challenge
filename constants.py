@@ -1,6 +1,6 @@
 import os
 
-DATA_ROOT = os.environ['DATA_ROOT']
+DATA_ROOT = os.environ.get('DATA_ROOT')
 
 LABELS_MAP = {
     0: "class1",
