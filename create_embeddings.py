@@ -33,6 +33,6 @@ if __name__ == "__main__":
             class_sample = i % 100
             int_label = int(torch.argmax(label))
 
-            emb_path = Path(Path.cwd() / "embeddings" / LABELS_MAP[int_label] / f"c{int_label+1}_{str(class_sample).zfill(3)}.pt")
+            emb_path = Path.cwd() / "embeddings" / LABELS_MAP[int_label] / f"c{int_label+1}_{str(class_sample).zfill(3)}.pt"
             torch.save(features, emb_path)
             
