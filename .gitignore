@@ -1,4 +1,5 @@
 challenge/
+embeddings/
 mlp.pth
 explore.ipynb
 
