@@ -8,15 +8,15 @@ This project uses the `poetry` package manager. If you also use poetry, you can 
 # How to run the code
 ### A - Training and testing a new model on the challenge data
 The first part consists in generating and saving the embeddings for easier and faster training.
-1) Locate the dataset folder which contains the TIF images in the `class1`,`class2`,`class3`,`class4` subfolders.
-2) Run the script `python create_embeddings.py /path/to/challenge/images/` once. This will generate an `embeddings/` folder at the project root with the same structure as the challenge data, and save the `.pt` file corresponding to each image.
+1) Locate the dataset folder which contains the challenge images in the `class1`,`class2`,`class3`,`class4` subfolders.
+2) Run the script `python create_embeddings.py /path/to/challenge/images/` once. This will generate an `embeddings/` folder at the project root with the same structure as the challenge data, and save the `.pt` file corresponding to each image. Wait for the 400 embeddings to be generated. 
 
-For the sake of simplicty, training and testing the model on the available data can be done directly in a notebook.
-3) Run the whole `train_test.ipynb` notebook. This will train a fresh MLP, show training/validation loss curves, and evaluate the performance on a test set. The trained MLP model will be exported at the project root as `mlp.pth`
+For the sake of simplicity, training and testing the model on the available data can be done directly in a notebook.
+3) Run the whole `train_test.ipynb`. This will train a fresh MLP, show training/validation loss curves, and evaluate the performance on a test set. The trained MLP weights will be exported at the project root as `mlp.pth`
 
 ### B - Testing a trained model on any image
 You can also run the model on the challenge data, or any other image.
-1) Ensure that the trained weights `mlp.pth` are located at the root of this project.
+1) Ensure that the trained weights `mlp.pth` are located at the root of the project.
 2) Run `python classify_image.py /path/to/any/other/image.tif`
 3) The program will output the predicted class in the console.
 
