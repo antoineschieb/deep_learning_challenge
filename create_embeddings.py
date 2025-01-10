@@ -1,4 +1,4 @@
-import os
+import sys
 import torch
 from transformers import AutoImageProcessor, AutoModel
 from dataset import CustomImageDataset
@@ -18,7 +18,7 @@ if __name__ == "__main__":
     model = AutoModel.from_pretrained("owkin/phikon-v2")
     model.eval()
 
-    full_ds = CustomImageDataset(list(range(400)))
+    full_ds = CustomImageDataset(list(range(400)), load_embeddings=False, images_folder_path=sys.argv[1])
 
     with torch.inference_mode():
         for i,(image,label) in tqdm(enumerate(full_ds)):
