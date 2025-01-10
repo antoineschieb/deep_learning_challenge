@@ -8,6 +8,17 @@ from model import MLP
 
 
 def classify(image, processor, encoder, mlp):
+    """
+    Classify a given image. 
+    Args:
+      - image (PIL.Image): the input image to classify
+      - processor (transformers.AutoImageProcessor): The processor given by the Phikon-v2 authors
+      - encoder (transformer.AutoModel): The Phikon-v2 pretrained backbone. 
+      - mlp (model.MLP): A trained MLP. 
+
+    Outputs:
+      - predicted_class (str): Either 'class1', 'class2', 'class3' or 'class4'.
+    """
     with torch.inference_mode():
         # Process the image
         inputs = processor(image, return_tensors="pt")

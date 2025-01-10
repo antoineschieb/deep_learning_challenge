@@ -9,6 +9,20 @@ from constants import LABELS_MAP
 
 
 class CustomImageDataset(Dataset):
+    """
+    Custom Dataset class that loads either images or embeddings.
+    There are 4 classes of 100 samples each, so each sample is associated to an integer between 0 and 399. 
+
+    Args:
+    - samples (List or slice): Sample to use for this dataset instance.
+    
+    - load_embeddings (bool): Wether to load embeddings or images. 
+      If load_embeddings=False, then images_folder_path needs to be specified.
+      If load_embeddings=True, then the embeddings need to be present in the embeddings/ folder.
+      This can be done by running the create_embeddings.py script first
+
+    - images_folder_path (string): Path to the folder containing the challenge images
+    """
     def __init__(self, samples, load_embeddings=False, images_folder_path=None):
         if not load_embeddings and images_folder_path is None:
             raise RuntimeError('You must provide the image folder path if you wish to load images')
