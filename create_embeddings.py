@@ -3,11 +3,16 @@ import torch
 from transformers import AutoImageProcessor, AutoModel
 from dataset import CustomImageDataset
 from tqdm import tqdm
+from pathlib import Path
 
-from constants import DATA_ROOT, LABELS_MAP
+from constants import LABELS_MAP
 
 
 if __name__ == "__main__":
+    
+    for c in range(1,5):
+        Path(Path.cwd() / "embeddings" / f"class{c}").mkdir(parents=True, exist_ok=True)
+
     # Load phikon-v2 encoder
     processor = AutoImageProcessor.from_pretrained("owkin/phikon-v2")
     model = AutoModel.from_pretrained("owkin/phikon-v2")
@@ -26,6 +31,8 @@ if __name__ == "__main__":
             features = outputs.last_hidden_state[:, 0, :]  # (1, 1024) shape
 
             class_sample = i % 100
-
             int_label = int(torch.argmax(label))
-            torch.save(features, os.path.join(DATA_ROOT,f"{LABELS_MAP[int_label]}/c{int_label+1}_{str(class_sample).zfill(3)}.pt"))
+
+            emb_path = Path(Path.cwd() / "embeddings" / LABELS_MAP[int_label] / f"c{int_label+1}_{str(class_sample).zfill(3)}.pt")
+            torch.save(features, emb_path)
+            

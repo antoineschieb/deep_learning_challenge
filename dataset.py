@@ -1,5 +1,6 @@
 import os
 from functools import cache
+from pathlib import Path
 from PIL import Image
 import torch
 from torch.utils.data import Dataset
@@ -25,11 +26,12 @@ class CustomImageDataset(Dataset):
         class_sample = data_index % 100
         
         if self.load_embeddings:
-            emb_path = os.path.join(DATA_ROOT,f"{LABELS_MAP[label]}/c{label+1}_{str(class_sample).zfill(3)}.pt")
+            emb_path = Path(Path.cwd() / "embeddings" / LABELS_MAP[label] / f"c{label+1}_{str(class_sample).zfill(3)}.pt")
             emb = torch.load(emb_path, weights_only=True)
             return emb, one_hot(torch.tensor(label), num_classes=4).to(torch.float)
         else:
-            img_path = os.path.join(DATA_ROOT,f"{LABELS_MAP[label]}/c{label+1}_{str(class_sample).zfill(3)}.tif")
+            img_path = Path(DATA_ROOT / LABELS_MAP[label] / f"c{label+1}_{str(class_sample).zfill(3)}.tif")
             image = Image.open(img_path)
             return image, one_hot(torch.tensor(label), num_classes=4).to(torch.float)
+        
     
